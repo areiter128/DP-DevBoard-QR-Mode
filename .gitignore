@@ -72,3 +72,6 @@ pcmcDAC.X/nbproject/Makefile-genesis.properties
 pcmcDAC.X/nbproject/project.xml
 pcmcDAC.X/nbproject/private/configurations.xml
 pcmcDAC.X/dist/DPDB_MA330048/debug/
+qr-mode_setup.X/nbproject/Makefile-genesis.properties
+qr-mode_setup.X/nbproject/private/configurations.xml
+qr-mode_setup.X/nbproject/private/private.xml
