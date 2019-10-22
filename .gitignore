@@ -1,0 +1,74 @@
+# .gitignore file
+#
+# Template for Microchip/MPLAB X development environment
+#
+# M91406, Andreas Reiter
+# Updated July 10, 2019
+
+### Project-specific excludes ###
+docs/
+sepic_pcmc.X/build/
+sepic_pcmc.X/debug/
+sepic_pcmc.X/nbproject/private/
+sepic_pcmc.X/nbproject/Makefile-*
+
+### Misc ###
+~*.*
+.svn
+*.bak
+*.log
+*.exe
+*.zip
+
+# Created by https://www.gitignore.io/api/mplabx
+# Edit at https://www.gitignore.io/?templates=mplabx
+
+### MPLabX ###
+#Ignore List for Microchips MPLAB X IDE
+#Form of netbeans with vendor specific changes
+#Taken from zeha on GIST https://gist.github.com/zeha/5999375
+#Edited and extended by M91406 (Andreas Reiter)
+
+*.d
+*.pre
+*.p1
+*.lst
+*.sym
+*.obj
+*.o
+*.sdb
+*.obj.dmp
+*.mk
+*.bash
+disassembly/
+html/
+nbproject/private/
+nbproject/Package-*.bash
+build/
+nbbuild/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+funclist
+nbproject/Makefile-*
+disassembly/
+*.map
+
+# End of https://www.gitignore.io/api/mplabx
+
+### Project specific files to keep ###
+!configurations.xml
+!*.dcld
+!readme.txt
+!readme.md
+!Makefile
+!src/
+!h/
+!dist/
+
+
+pcmcDAC.X/nbproject/private/private.xml
+pcmcDAC.X/nbproject/Makefile-genesis.properties
+pcmcDAC.X/nbproject/project.xml
+pcmcDAC.X/nbproject/private/configurations.xml
+pcmcDAC.X/dist/DPDB_MA330048/debug/
