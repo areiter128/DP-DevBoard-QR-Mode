@@ -47,45 +47,86 @@ volatile uint16_t init_acmp_module(void) {
 
 volatile uint16_t init_acmp(void) {
 
+//    // DACxCONL: DACx CONTROL LOW REGISTER
+//    DAC1CONLbits.DACEN = 0; // Individual DACx Module Enable: Disables DACx module during configuration
+//    DAC1CONLbits.IRQM = 0b00; // Interrupt Mode Selection: Interrupts are disabled
+//    DAC1CONLbits.CBE = 0; //1; // Comparator Blank Enable: Enables the analog comparator output to be blanked (gated off) during the recovery transition following the completion of a slope operation
+//    DAC1CONLbits.DACOEN = 1; // DACx Output Buffer Enable: DACx analog voltage is connected to the DACOUT1 pin (RA3/TP35 on DPSK3)
+//    // DAC1CONLbits.CMPSTAT (read only bit)
+//
+//    // Comparator filter and hysteresis options
+//    DAC1CONLbits.FLTREN = 0; // Comparator Digital Filter Enable: Digital filter is disabled
+//    DAC1CONLbits.CMPPOL = 0; // Comparator Output Polarity Control: Output is (0=non-inverted, 1=inverted)
+//    DAC1CONLbits.INSEL = 0b011; // Comparator Input Source Select: feedback is connected to (0=CMPxA, 1=CMPxB, 2=CMPxC, 3=CMPxD) input pin
+//    DAC1CONLbits.HYSPOL = 0; // Comparator Hysteresis Polarity Selection: Hysteresis is applied to the (0=rising, 1=falling) edge of the comparator output
+//    DAC1CONLbits.HYSSEL = 0b00; // Comparator Hysteresis Selection: (0 = 0mV, 1 = 15mV, 2 = 30mV, 3 = 45mV)
+//    
+//    // DACxCONH: DACx CONTROL HIGH REGISTER
+//    
+//    // ***********************************************
+//    // ToDo: CHECK DAC LEB PERIOD TO BE CORRECT AND DOESN'T CREATE CONFLICTS
+//    DAC1CONHbits.TMCB = 0; //DAC_TMCB; // DACx Leading-Edge Blanking: period for the comparator
+//    // ***********************************************
+//    
+//    // DACxDATH: DACx DATA HIGH REGISTER
+//    DAC1DATH = (INIT_DACDATH & 0x0FFF); // DACx Data: This register specifies the high DACx data value. Valid values are from 205 to 3890.
+//    DAC1DATL = (INIT_DACDATL & 0x0FFF); // DACx Low Data
+//        
+//    // SLPxCONH: DACx SLOPE CONTROL HIGH REGISTER
+//    SLP1CONHbits.SLOPEN = 0; // Slope Function Enable/On: Enables slope function
+//    SLP1CONHbits.HME = 0; // Hysteretic Mode Enable: Disables Hysteretic mode for DACx
+//    SLP1CONHbits.TWME = 0; // Triangle Wave Mode Enable: Disables Triangle Wave mode for DACx
+//    SLP1CONHbits.PSE = 0; // Positive Slope Mode Enable: Slope mode is negative (decreasing)
+//    
+//    // SLPxCONL: DACx SLOPE CONTROL LOW REGISTER
+//    SLP1CONLbits.HCFSEL = 0b0000; // Hysteretic Comparator Function Input Selection: (none)
+//    SLP1CONLbits.SLPSTOPA = 0b0001; // Slope Stop A Signal Selection: PWM1 Trigger 2 => PGxTRIGB
+//    SLP1CONLbits.SLPSTOPB = 0b0000; // Slope Stop B Signal Selection: (none) //CMP1 Out
+//    SLP1CONLbits.SLPSTRT = 0b0001; // Slope Start Signal Selection: PWM1 Trigger 1 => PGxTRIGA
+//    
+//    // SLPxDAT: DACx SLOPE DATA REGISTER
+//    SLP1DAT = 0; //DAC_SLOPE_RATE; // Slope Ramp Rate Value
+    
+    
     // DACxCONL: DACx CONTROL LOW REGISTER
-    DAC1CONLbits.DACEN = 0; // Individual DACx Module Enable: Disables DACx module during configuration
-    DAC1CONLbits.IRQM = 0b00; // Interrupt Mode Selection: Interrupts are disabled
-    DAC1CONLbits.CBE = 0; //1; // Comparator Blank Enable: Enables the analog comparator output to be blanked (gated off) during the recovery transition following the completion of a slope operation
-    DAC1CONLbits.DACOEN = 1; // DACx Output Buffer Enable: DACx analog voltage is connected to the DACOUT1 pin (RA3/TP35 on DPSK3)
+    DAC3CONLbits.DACEN = 0; // Individual DACx Module Enable: Disables DACx module during configuration
+    DAC3CONLbits.IRQM = 0b00; // Interrupt Mode Selection: Interrupts are disabled
+    DAC3CONLbits.CBE = 0; //1; // Comparator Blank Enable: Enables the analog comparator output to be blanked (gated off) during the recovery transition following the completion of a slope operation
+    DAC3CONLbits.DACOEN = 1; // DACx Output Buffer Enable: DACx analog voltage is connected to the DACOUT1 pin (RA3/TP35 on DPSK3)
     // DAC1CONLbits.CMPSTAT (read only bit)
 
     // Comparator filter and hysteresis options
-    DAC1CONLbits.FLTREN = 0; // Comparator Digital Filter Enable: Digital filter is disabled
-    DAC1CONLbits.CMPPOL = 0; // Comparator Output Polarity Control: Output is (0=non-inverted, 1=inverted)
-    DAC1CONLbits.INSEL = 0b011; // Comparator Input Source Select: feedback is connected to (0=CMPxA, 1=CMPxB, 2=CMPxC, 3=CMPxD) input pin
-    DAC1CONLbits.HYSPOL = 0; // Comparator Hysteresis Polarity Selection: Hysteresis is applied to the (0=rising, 1=falling) edge of the comparator output
-    DAC1CONLbits.HYSSEL = 0b00; // Comparator Hysteresis Selection: (0 = 0mV, 1 = 15mV, 2 = 30mV, 3 = 45mV)
+    DAC3CONLbits.FLTREN = 1; // Comparator Digital Filter Enable: Digital filter is disabled
+    DAC3CONLbits.CMPPOL = 0; // Comparator Output Polarity Control: Output is (0=non-inverted, 1=inverted)
+    DAC3CONLbits.INSEL = 0b001; // Comparator Input Source Select: feedback is connected to (0=CMPxA, 1=CMPxB, 2=CMPxC, 3=CMPxD) input pin
+    DAC3CONLbits.HYSPOL = 0; // Comparator Hysteresis Polarity Selection: Hysteresis is applied to the (0=rising, 1=falling) edge of the comparator output
+    DAC3CONLbits.HYSSEL = 0b10; // Comparator Hysteresis Selection: (0 = 0mV, 1 = 15mV, 2 = 30mV, 3 = 45mV)
     
     // DACxCONH: DACx CONTROL HIGH REGISTER
     
     // ***********************************************
     // ToDo: CHECK DAC LEB PERIOD TO BE CORRECT AND DOESN'T CREATE CONFLICTS
-    DAC1CONHbits.TMCB = 0; //DAC_TMCB; // DACx Leading-Edge Blanking: period for the comparator
+    DAC3CONHbits.TMCB = 0; //DAC_TMCB; // DACx Leading-Edge Blanking: period for the comparator
     // ***********************************************
     
     // DACxDATH: DACx DATA HIGH REGISTER
-    DAC1DATH = (INIT_DACDATH & 0x0FFF); // DACx Data: This register specifies the high DACx data value. Valid values are from 205 to 3890.
-    DAC1DATL = (INIT_DACDATL & 0x0FFF); // DACx Low Data
+    DAC3DATH = (INIT_DACDATH & 0x0FFF); // DACx Data: This register specifies the high DACx data value. Valid values are from 205 to 3890.
+    DAC3DATL = (INIT_DACDATL & 0x0FFF); // DACx Low Data
         
     // SLPxCONH: DACx SLOPE CONTROL HIGH REGISTER
-    SLP1CONHbits.SLOPEN = 0; // Slope Function Enable/On: Enables slope function
-    SLP1CONHbits.HME = 0; // Hysteretic Mode Enable: Disables Hysteretic mode for DACx
-    SLP1CONHbits.TWME = 0; // Triangle Wave Mode Enable: Disables Triangle Wave mode for DACx
-    SLP1CONHbits.PSE = 0; // Positive Slope Mode Enable: Slope mode is negative (decreasing)
+    SLP3CONHbits.SLOPEN = 0; // Slope Function Enable/On: Enables slope function
+    SLP3CONHbits.HME = 0; // Hysteretic Mode Enable: Disables Hysteretic mode for DACx
+    SLP3CONHbits.TWME = 0; // Triangle Wave Mode Enable: Disables Triangle Wave mode for DACx
+    SLP3CONHbits.PSE = 0; // Positive Slope Mode Enable: Slope mode is negative (decreasing)
     
     // SLPxCONL: DACx SLOPE CONTROL LOW REGISTER
-    SLP1CONLbits.HCFSEL = 0b0000; // Hysteretic Comparator Function Input Selection: (none)
-    SLP1CONLbits.SLPSTOPA = 0b0001; // Slope Stop A Signal Selection: PWM1 Trigger 2 => PGxTRIGB
-    SLP1CONLbits.SLPSTOPB = 0b0000; // Slope Stop B Signal Selection: (none) //CMP1 Out
-    SLP1CONLbits.SLPSTRT = 0b0001; // Slope Start Signal Selection: PWM1 Trigger 1 => PGxTRIGA
+    SLP3CONLbits.HCFSEL = 0b0000; // Hysteretic Comparator Function Input Selection: (none)
+    SLP3CONLbits.SLPSTOPA = 0b0001; // Slope Stop A Signal Selection: PWM1 Trigger 2 => PGxTRIGB
+    SLP3CONLbits.SLPSTOPB = 0b0000; // Slope Stop B Signal Selection: (none) //CMP1 Out
+    SLP3CONLbits.SLPSTRT = 0b0001; // Slope Start Signal Selection: PWM1 Trigger 1 => PGxTRIGA
     
     // SLPxDAT: DACx SLOPE DATA REGISTER
-    SLP1DAT = 0; //DAC_SLOPE_RATE; // Slope Ramp Rate Value
+    SLP3DAT = 0; //DAC_SLOPE_RATE; // Slope Ramp Rate Value
             
         
     return(1);
@@ -93,8 +134,10 @@ volatile uint16_t init_acmp(void) {
 
 volatile uint16_t launch_acmp(void) {
     
-    DAC1CONLbits.DACEN = 1; // Individual DACx Module Enable: Enables DAC1 module 
+//    DAC1CONLbits.DACEN = 1; // Individual DACx Module Enable: Enables DAC1 module 
+    DAC3CONLbits.DACEN = 1; // Individual DACx Module Enable: Enables DAC1 module 
     DACCTRL1Lbits.DACON = 1; // Common DAC Module Enable: Enables all enabled DAC modules
+        
     
     return(1);
 }

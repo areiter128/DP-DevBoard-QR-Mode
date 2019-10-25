@@ -235,8 +235,8 @@ void __attribute__((__interrupt__, auto_psv, context))_VOUT_ADCInterrupt(void)
 
     // here the control loop would be called
     //    c2p2z_Update(&c2p2z); // Control loop has been disabled
-    DAC1DATH = converter.data.v_ref;  // Copy averaged value into reference value
-
+//    DAC1DATH = converter.data.v_ref;  // Copy averaged value into reference value
+    DAC3DATH = converter.data.v_ref;
     _ADCAN16IF = 0;  // Clear the ADCANx interrupt flag 
 
     DGBPIN_2_CLEAR;
